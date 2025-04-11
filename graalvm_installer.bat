@@ -14,18 +14,15 @@ if %errorLevel% neq 0 (
 )
 
 echo Select GraalVM JDK version to install:
-echo 1. GraalVM JDK 17
-echo 2. GraalVM JDK 21
-echo 3. GraalVM JDK 24
+echo 1. GraalVM JDK 21
+echo 2. GraalVM JDK 24
 echo.
 
 set /p choice="Choose an option (1-3): "
 
 if "%choice%"=="1" (
-    set "java_version=17"
-) else if "%choice%"=="2" (
     set "java_version=21"
-) else if "%choice%"=="3" (
+) else if "%choice%"=="2" (
     set "java_version=24"
 ) else (
     echo Invalid selection. Exiting...
