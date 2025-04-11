@@ -2,30 +2,30 @@
 
 setlocal enabledelayedexpansion
 
-echo GraalVM Installation Script for Windows
+echo Windows용 GraalVM 설치 스크립트
 
 net session >nul 2>&1
 
 if %errorLevel% neq 0 (
-    echo Administrator privileges required.
-    echo Please run as administrator.
+    echo 관리자 권한이 필요합니다.
+    echo 관리자 권한으로 실행하세요.
     pause
     exit /b 1
 )
 
-echo Select GraalVM JDK version to install:
+echo 설치할 GraalVM JDK 버전을 선택합니다:
 echo 1. GraalVM JDK 21
 echo 2. GraalVM JDK 24
 echo.
 
-set /p choice="Choose an option (1-2): "
+set /p choice="버전(1-2)를 선택합니다: "
 
 if "%choice%"=="1" (
     set "java_version=21"
 ) else if "%choice%"=="2" (
     set "java_version=24"
 ) else (
-    echo Invalid selection. Exiting...
+    echo 잘못된 선택입니다. 종료...
     exit /b 1
 )
 
@@ -36,11 +36,11 @@ set "download_path=%download_dir%\%graalvm_filename%"
 
 if not exist "%download_dir%" mkdir "%download_dir%"
 
-echo Downloading GraalVM JDK %java_version%...
+echo GraalVM JDK %java_version% 다운로드 하는 중...
 powershell -Command "& {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://download.oracle.com/graalvm/%java_version%/latest/graalvm-jdk-%java_version%_windows-x64_bin.zip' -OutFile '%download_path%'}"
 
 if not exist "%download_path%" (
-    echo Download failed. Please download manually from:
+    echo 다운로드에 실패했습니다. 다음에서 수동으로 다운로드하세요:
     echo https://www.graalvm.org/downloads/
     exit /b 1
 )
